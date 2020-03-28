@@ -1,0 +1,11 @@
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\bin\Release\netstandard2.0\RoboRebo.deps.json
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\bin\Release\netstandard2.0\RoboRebo.dll
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\bin\Release\netstandard2.0\RoboRebo.pdb
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\bin\Release\netstandard2.0\robocode.dll
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\bin\Release\netstandard2.0\robocode.xml
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\obj\Release\netstandard2.0\RoboRebo.AssemblyInfoInputs.cache
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\obj\Release\netstandard2.0\RoboRebo.AssemblyInfo.cs
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\obj\Release\netstandard2.0\RoboRebo.csproj.CopyComplete
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\obj\Release\netstandard2.0\RoboRebo.dll
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\obj\Release\netstandard2.0\RoboRebo.pdb
+C:\Users\geoff\source\repos\RoboRebo\RoboRebo\obj\Release\netstandard2.0\RoboRebo.csprojAssemblyReference.cache
