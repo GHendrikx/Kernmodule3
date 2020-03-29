@@ -8,7 +8,6 @@ namespace GHRoboRepo
 {
     public class Shoot : BTNode
     {
-        private float power;
         public Shoot(BlackBoard blackBoard)
         {
             this.blackBoard = blackBoard;
@@ -17,8 +16,8 @@ namespace GHRoboRepo
         public override BTNodeStatus Tick()
         {
             blackBoard.Robot.SetColors(Color.Black, Color.Black, Color.Black);
-            if (blackBoard.canShoot)
-                blackBoard.Robot.Fire(blackBoard.firePower);
+            if (blackBoard.CanShoot)
+                blackBoard.Robot.Fire(blackBoard.FirePower);
             return BTNodeStatus.Succes;
         }
 

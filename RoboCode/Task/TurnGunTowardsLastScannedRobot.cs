@@ -30,8 +30,8 @@ namespace GHRoboRepo
                 double yPos = blackBoard.Robot.Y;
 
                 //enemy Pos
-                double xEnemyPos = blackBoard.enemyPositions[0];
-                double yEnemyPos = blackBoard.enemyPositions[1];
+                double xEnemyPos = blackBoard.EnemyPositions[0];
+                double yEnemyPos = blackBoard.EnemyPositions[1];
 
                 //enemy velocity in x and y
                 double xSpeed = blackBoard.LastScannedRobotEvent.Velocity * Math.Cos(blackBoard.LastScannedRobotEvent.BearingRadians);
@@ -46,25 +46,26 @@ namespace GHRoboRepo
                 double bulletTravelDistance = blackBoard.LastScannedRobotEvent.Distance;
 
 
-                blackBoard.firePower = 1;
+                blackBoard.FirePower = 1;
 
-                blackBoard.canShoot = false;
+                blackBoard.CanShoot = false;
                 CalculateBulletTravelTime(ref bulletTravelDistance, ref bulletTravelTime, ref xTarget, ref yTarget, ref xPos, ref yPos, ref xEnemyPos, ref yEnemyPos, ref xSpeed, ref ySpeed);
                 
-                if(!blackBoard.targetPrediction)
+                //calculate Precision of the Bullet
+                if(!blackBoard.TargetPrediction)
                     for (int i = 1; i < 7; i++)
                     {
                         if (bulletTravelTime < 25 && bulletTravelTime > 0)
                         {
-                            blackBoard.firePower = i;
+                            blackBoard.FirePower = i;
                             CalculateBulletTravelTime(ref bulletTravelDistance, ref bulletTravelTime, ref xTarget, ref yTarget, ref xPos, ref yPos, ref xEnemyPos, ref yEnemyPos, ref xSpeed, ref ySpeed);
                         }
                         else
                         {
-                            blackBoard.firePower -= 1;
+                            blackBoard.FirePower -= 1;
                             CalculateBulletTravelTime(ref bulletTravelDistance, ref bulletTravelTime, ref xTarget, ref yTarget, ref xPos, ref yPos, ref xEnemyPos, ref yEnemyPos, ref xSpeed, ref ySpeed);
                             if(bulletTravelTime < 25 && bulletTravelTime > 0)
-                                blackBoard.canShoot = true;
+                                blackBoard.CanShoot = true;
                             break;
                         }
                     }
@@ -81,7 +82,7 @@ namespace GHRoboRepo
                     targetBearing -= 2 * blackBoard.Robot.Heading;
                 }
 
-
+                //calculate Rotation
                 double rotation = (targetBearing -
                     (blackBoard.Robot.GunHeading - blackBoard.Robot.Heading));
 
@@ -113,7 +114,7 @@ namespace GHRoboRepo
             for (int i = 0; i < 10; i++)
             {
                 bulletTravelDistance = Math.Sqrt(Math.Pow(xTarget - xPos, 2) + Math.Pow(yTarget - yPos, 2));
-                bulletTravelTime = bulletTravelDistance / (20 - 3 * blackBoard.firePower);
+                bulletTravelTime = bulletTravelDistance / (20 - 3 * blackBoard.FirePower);
 
                 xTarget = xEnemyPos + xSpeed * bulletTravelTime;
                 yTarget = yEnemyPos + ySpeed * bulletTravelTime;

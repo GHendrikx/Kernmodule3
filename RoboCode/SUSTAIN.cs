@@ -12,33 +12,33 @@ namespace GHRoboRepo
         public BTNode ShootTree;
         public BTNode DriveTree;
 
-        public List<Sequencer> sequencer;
-        public BlackBoard blackBoard = new BlackBoard();
+        public List<Sequencer> Sequencer;
+        public BlackBoard BlackBoard = new BlackBoard();
 
         public override void Run()
         {
-            blackBoard.Robot = this;
+            BlackBoard.Robot = this;
             IsAdjustGunForRobotTurn = true;
             IsAdjustRadarForGunTurn = true;
 
-            ScanTree = new Sequencer(blackBoard, new ScanRobot(blackBoard, 360));
+            ScanTree = new Sequencer(BlackBoard, new ScanRobot(BlackBoard));
 
             ShootTree =
-                new Sequencer(blackBoard,
-                new TurnGunTowardsLastScannedRobot(blackBoard),
-                new Shoot(blackBoard)
+                new Sequencer(BlackBoard,
+                new TurnGunTowardsLastScannedRobot(BlackBoard),
+                new Shoot(BlackBoard)
                 );
 
             DriveTree =
-                new Sequencer(blackBoard,
-                new Turn(blackBoard),
-                new MoveAhead(blackBoard));
+                new Sequencer(BlackBoard,
+                new Turn(BlackBoard),
+                new MoveAhead(BlackBoard));
 
             while (true)
             {
                 ScanTree.Tick();
                 ShootTree.Tick();
-                blackBoard.targetPrediction = !blackBoard.targetPrediction;
+                BlackBoard.TargetPrediction = !BlackBoard.TargetPrediction;
                 DriveTree.Tick();
             }
         }
@@ -46,7 +46,7 @@ namespace GHRoboRepo
         public override void OnScannedRobot(ScannedRobotEvent evnt)
         {
             base.OnScannedRobot(evnt);
-            blackBoard.LastScannedRobotEvent = evnt;
+            BlackBoard.LastScannedRobotEvent = evnt;
             GetPositionOfEnemy(evnt);
 
         }
@@ -55,13 +55,13 @@ namespace GHRoboRepo
         public void GetPositionOfEnemy(ScannedRobotEvent e)
         {
 
-            double angle = ConvertToRadians(blackBoard.Robot.Heading + e.Bearing % 360);
-            double scannedX = (blackBoard.Robot.X + Math.Sin(angle) * e.Distance);
-            double scannedY = (blackBoard.Robot.Y + Math.Cos(angle) * e.Distance);
+            double angle = ConvertToRadians(BlackBoard.Robot.Heading + e.Bearing % 360);
+            double scannedX = (BlackBoard.Robot.X + Math.Sin(angle) * e.Distance);
+            double scannedY = (BlackBoard.Robot.Y + Math.Cos(angle) * e.Distance);
 
             double[] positions = new double[2] { scannedX, scannedY };
 
-            blackBoard.enemyPositions = positions;
+            BlackBoard.EnemyPositions = positions;
         }
 
         public double ConvertToRadians(double angle)
@@ -72,7 +72,7 @@ namespace GHRoboRepo
         public override void OnWin(WinEvent evnt)
         {
             base.OnWin(evnt);
-            blackBoard.Robot.SetAllColors(Color.OrangeRed);
+            BlackBoard.Robot.SetAllColors(Color.OrangeRed);
         }
 
     }
